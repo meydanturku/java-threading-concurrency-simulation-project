@@ -34,4 +34,9 @@ public class TaskController {
         return "Bank Thread'ler başlatıldı!";
     }
 
+    @GetMapping("/restaurant/start")
+    public String startRestaurantThread() {
+        taskRunnerService.startRestaurantTask();
+        return "Restaurant Thread başlatıldı!";
+    }
 }

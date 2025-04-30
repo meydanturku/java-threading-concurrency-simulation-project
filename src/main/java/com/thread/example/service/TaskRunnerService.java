@@ -3,6 +3,7 @@ package com.thread.example.service;
 
 import com.thread.example.model.Account;
 import com.thread.example.model.AccountWithLock;
+import com.thread.example.model.RestaurantTable;
 import com.thread.example.task.CounterTask;
 import com.thread.example.task.MessageTask;
 import com.thread.example.task.TimeTask;
@@ -12,6 +13,7 @@ import com.thread.example.task.bankExample.WithdrawTask;
 import com.thread.example.task.bankExampleWLock.BalanceCheckWLockTask;
 import com.thread.example.task.bankExampleWLock.DepositWLockTask;
 import com.thread.example.task.bankExampleWLock.WithdrawWLockTask;
+import com.thread.example.task.restaurantExample.CustomerTask;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -49,6 +51,14 @@ public class TaskRunnerService {
         depositThread.start();
         withdrawThread.start();
         balanceCheckThread.start();;
+    }
+
+    public void startRestaurantTask() {
+        RestaurantTable restaurantTable = new RestaurantTable();
+
+        Thread restaurantTableThread = new Thread(new CustomerTask(restaurantTable), "customerThread");
+
+        restaurantTableThread.start();
     }
 }
 
